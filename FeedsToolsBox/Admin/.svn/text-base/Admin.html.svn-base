@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+ Copyright 2010 Yu Jianrong, All Rights Reserved
+ 
+ Licensed under BSD License.
+-->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <script type="text/javascript" charset="UTF-8" src="/js/mootools-1.2.4-core-yc.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/js/Utilities.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/Admin/Admin.js" ></script>
+        <title>Admin pandel</title>
+    </head>
+
+    <body>
+        Admin pandel
+        <br/>
+
+        <div id="page_Loading" style="display: inline">
+            Loading.
+            <br/>
+        </div>
+
+        <div id="page_Admin" style="display: none">
+            Allowed Users: <br/>
+            <div id="Lst_Users">
+            </div>
+            <br/>
+            <textarea name="Txt_NewUser" id="Txt_NewUser" rows="10" cols="50" ></textarea><br/>
+            <input type="button" id="Btn_AddUser" value="Add Users" />
+            <br/><br/>
+            Applications: <br/>
+            <div id="Lst_Applications">
+            </div>
+            Auto fetched URLs:
+            <div id="Lst_FetchCacheURLs">
+            </div>
+            <textarea name="Txt_FetchCacheURLs" id="Txt_FetchCacheURLs" rows="10" cols="50" ></textarea><br/>
+            <input type="button" id="Btn_AddFetchCacheURLs" value="Add Auto fetched URL" />
+            <br/>
+        </div>
+    </body>
+</html>
+<!--
+    vim:ts=4:ft=htmlos:encoding=utf8
+-->
+

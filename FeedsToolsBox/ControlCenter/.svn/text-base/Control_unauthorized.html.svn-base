@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+ Copyright 2010 Yu Jianrong, All Rights Reserved
+ 
+ Licensed under BSD License.
+-->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <script type="text/javascript" charset="UTF-8" src="/js/mootools-1.2.4-core-yc.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/js/Utilities.js" ></script>
+        <title>Unauthorized User</title>
+        <script type="text/javascript">
+        function Apply()
+        {
+            getResult("/ControlCenter/Control", {cmd:"ApplyPermission"});
+            $("page_Admin").hide(function(){$("page_RequestSent").show();});
+        }
+        window.addEvent('domready', function(){$("Btn_Apply").addEvent('click',Apply)});
+        </script>
+    </head>
+    <body>
+        Unauthorized User
+        <br/>
+
+        <div id="page_Admin" style="display: inline">
+            <br/>
+            Note: You're not authorized to use this service, do you want to apply for the pemmison for this service? 
+            <br/>
+            <input type="button" id="Btn_Apply" value="Apply Permission" />
+        </div>
+        <div id="page_RequestSent" style="display: none">
+            <br/>
+            Your request had been sent to the server.
+            <br/>
+        </div>
+        <br/><a href="%(LogoutLink)s">Sign Out</a>
+    </body>
+</html>
+<!--
+    vim:ts=4:ft=htmlos:encoding=utf8
+-->
+
+

@@ -1,0 +1,62 @@
+application: feedtoolbox
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /js
+  static_dir: js
+- url: /Admin/Admin.py
+  script: Admin/Admin.py
+  login: admin
+- url: /Admin
+  static_files: Admin/Admin.html
+  upload: Admin/Admin.html
+  login: admin
+- url: /Admin/Admin.js
+  static_files: Admin/Admin.js
+  upload: Admin/Admin.js
+  login: admin
+
+- url: /
+  script: ControlCenter/Control.py
+  login: required
+- url: /ControlCenter/Control
+  script: ControlCenter/Control.py
+  login: required
+- url: /ControlCenter/Control.js
+  static_files: ControlCenter/Control.js
+  upload: ControlCenter/Control.js
+  login: required
+- url: /get.*
+  script: ControlCenter/get.py
+- url: /LocCheck
+  static_files: ControlCenter/LocCheck.html
+  upload: ControlCenter/LocCheck.html
+  login: required
+
+- url: /General/UpdateFetchCache
+  script: General/UpdateFetchCache.py
+  login: admin
+
+#  handlers:
+#  - url: /Admin.py
+#    script: Admin.py
+#    login: admin
+#  - url: /
+#    static_files: Admin.html
+#    upload: Admin.html
+#    login: admin
+#  - url: /Admin.js
+#    static_files: Admin.js
+#    upload: Admin.js
+#    login: admin
+#  - url: /GetUtf8Page.*
+#    script: launchPage.py
+#  - url: /RemoveDesc.*
+#    script: launchPage.py
+#  - url: /EPage.html
+#    static_files: EPage.html
+#    upload: EPage.html
+#  - url: /js
+#    static_dir: js

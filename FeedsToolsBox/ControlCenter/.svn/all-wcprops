@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/37/FeedsToolsbox/ControlCenter
+END
+LocData_zh_CN.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/LocData_zh_CN.py
+END
+FeedFilters.py
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/FeedFilters.py
+END
+Control.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/36/FeedsToolsbox/ControlCenter/Control.html
+END
+Control_unauthorized.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/Control_unauthorized.html
+END
+Result.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/Result.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/__init__.py
+END
+get.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/get.py
+END
+Control.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/Control.py
+END
+ContentExtend.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/ContentExtend.py
+END
+LocData_zh_TW.py
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/LocData_zh_TW.py
+END
+Control.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/Control.js
+END
+Links2Feed.py
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/37/FeedsToolsbox/ControlCenter/Links2Feed.py
+END
+LocCheck.html
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/35/FeedsToolsbox/ControlCenter/LocCheck.html
+END

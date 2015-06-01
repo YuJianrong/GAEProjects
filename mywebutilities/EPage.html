@@ -1,0 +1,65 @@
+﻿<html>
+<head><title>convert</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8">
+<script>
+    function convert()
+    {
+        var text = document.TextForm.oldText.value;
+        var newText = "";
+        var ChineseCharacterCount = 0;
+        var lastCharacter="";
+        var const_prepunctuation="［｛‘“〈《「『【〔〖（([{<";
+        var const_postpunctuation="’”∶、。〃〉》」』】〕〗！＂），．？］｝,.>?:;]})!";
+        var lastcharIsPostPunctuation = false;
+        for (var i=0; i<text.length; ++i)
+        {
+            var processChar = text.charAt(i);
+            if (text.charCodeAt(i) < 128 )
+            {
+                if (lastCharacter.charCodeAt(0) >=128 && processChar != ' ')
+                    newText += ' ';
+                newText += processChar;
+                ChineseCharacterCount = 0;
+            }
+            else
+            {
+                if ( lastcharIsPostPunctuation
+                    ||(ChineseCharacterCount == 0 && lastCharacter != ' ' && lastCharacter != "\n")
+                    ||(lastCharacter.charCodeAt(0) >=128 && const_prepunctuation.indexOf(processChar)!= -1))
+                {
+                    newText += ' ';
+                    ChineseCharacterCount = 0;
+                }
+                // special process for some punctuation
+                if (processChar == '，')
+                    processChar = ',';
+                else if (processChar == '！')
+                    processChar = '!';
+                else if (processChar == '（')
+                    processChar = '(';
+                else if (processChar == '）')
+                    processChar = ')';
+                newText += processChar;
+                if ( ChineseCharacterCount >=11 )
+                    ChineseCharacterCount = 0;
+                else
+                    ++ChineseCharacterCount ;
+            }
+            lastCharacter = processChar;
+            lastcharIsPostPunctuation = const_postpunctuation.indexOf(processChar)!= -1;
+        }
+        document.TextForm.newText.value = newText;
+    }
+</script>
+    <body>
+        eRepublik 中文发言切分器，请将中文粘帖于第一个文本框并点击convert.
+        <form name="TextForm">
+        <textarea name="oldText" rows="10" cols="100" wrap="virtual" tabindex="1"></textarea><br>
+        <input value="convert" type="button" onclick="convert()"><br>
+        <textarea name="newText" rows="10" cols="100" wrap="virtual" tabindex="3"></textarea><br>
+        增加前置标点和后置标点处理，最大程度减少中文文字之间插入的空格。有任何bug请向Wang Tian报告。
+    </form>
+    </body>
+</html>
+
+

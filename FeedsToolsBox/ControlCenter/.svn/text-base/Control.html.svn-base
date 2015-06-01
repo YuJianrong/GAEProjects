@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--
+ Copyright 2010 Yu Jianrong, All Rights Reserved
+ 
+ Licensed under BSD License.
+-->
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <script type="text/javascript" charset="UTF-8" src="/js/mootools-core-1.3.1-full-compat-yc.js" ></script>
+
+        <script type="text/javascript" charset="UTF-8" src="/js/Utilities.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/ControlCenter/Control.js" ></script>
+        <style type="text/css">
+            .FF_Error,.CE_Error,.L2F_Error,.RD_Error {color:red}
+            .PageTitle {font-weight:bold;font-size:larger}
+        </style>
+        <title>{LOC:HTMLPage_Title|Feed Toolbox Control Center}</title>
+    </head>
+
+    <body>
+        {LOC:Main_Title|Feed Toolbox Control Center}
+        <br/>
+        {LOC:Welcome_Message|Welcome: %(UserAccount)s }<a href="%(LogoutLink)s">{LOC:Sign_Out|Sign out}</a> <span id="span_GeneralError" style="display:none;color:white;background-color:red"></span>
+        <br/>
+
+        <div id="page_Loading" style="display: inline">
+            {LOC:Loading|Loading.}
+            <br/>
+        </div>
+
+        <div id="page_ControlCenter" style="display: none">
+            {LOC:CurrentTools|Current tools: }<br/>
+            <ul>
+                <span id="Main_li_Tools_proto" style="display:none">
+                    <li>
+                    <input type="button" value="{LOC:Main_BtnEdit|Edit}" name="edit" />
+                    <input type="button" value="{LOC:Main_BenRemove|Remove}" name="remove" />
+                    <b><span class="Main_li_isPublic" style="display:none;color:blue">{LOC:PublicTag|[Public]}</span><span class="Main_li_Name"></span></b> [ <span class="Main_li_Link"></span> ]
+                    </li>
+                </span>
+                <span id="Lst_CurrentTools"> </span>
+            </ul>
+            <br/>
+            {LOC:CreateTool|Create new tool:}<br/>
+            <ul>
+                <li><a id="newTool_RemoveDescription" href="RemoveDescription">{LOC:Tool_RD_Desc|Remove &lt;description&gt; tag of the feed(in HTML format)}</a><br/></li>
+                <li><a id="newTool_Links2Feeds" href="Links2Feed">{LOC:Tool_L2F_Desc|Convers links to Feed}</a><br/></li>
+                <li><a id="newTool_FeedFilters" href="FeedFilters">{LOC:Tool_FF_Desc|Filter Feed}</a><br/></li>
+                <li><a id="newTool_ContentExtend" href="ContentExtend">{LOC:Tool_CE_Desc|Extend the content(description) of the feed}</a><br/></li>
+            </ul>
+            <br/>
+            {LOC:GetPublicTool|Get Public configurations:}
+            <input type="button" value="{LOC:Main_BtnGetPublic|Get}" id="Main_GetPublicConfig" /><br>
+            <span id="Main_span_PublicNumber" style="display:none" >{LOC:PublicNumber|Public numbers: }<span id="Main_PublicNumber"></span></span>
+            <ul>
+                <span id="Main_li_Piblic_proto" style="display:none">
+                    <li>
+                    <input type="button" value="{LOC:Main_BtnVisitPublic|Visit}" name="visit" />
+                    <b><span class="Main_li_Name"></span></b><span class="Main_li_creator" style="display:none"> - <i><span class="Main_li_creator_name" style="color:blue"></span></i></span> [ <span class="Main_li_Link"></span> ]
+                    </li>
+                </span>
+                <span id="Lst_PublicTools"> </span>
+            </ul>
+            <br/>
+            {LOC:|Select the language:} 
+            <a href="English" class="Main_LangSelect" data="en">English</a> 
+            <a href="简体中文" class="Main_LangSelect" data="zh_CN">简体中文</a> 
+            <a href="繁體中文" class="Main_LangSelect" data="zh_TW">繁體中文</a>
+        </div>
+        
+        <div id="page_RemoveDescription" style="display: none">
+            <span class="PageTitle">{LOC:RD_Title|Remove Feed Description}</span>
+            <input type="button" value="{LOC:TOOL_BtnExit|Exit}" class="General_Btn_Exit" />
+            <span class="readonlyElement"><input type="button" value="{LOC:Tool_BtnClone|Clone to my private config}" class="General_Btn_Clone" /></span><br/><br/>
+            <div id="RD_InputURL">
+                {LOC:Tool_Name|Configuration name(optional):}<input type="text" class="General_Input_ConfigName" style="width:200px" /><br/>
+                <input type="checkbox" class="General_Input_IsPublic" onclick="this.getParent().getElement('[class=General_Input_PublicAccount]').disabled=!this.checked;" />
+                {LOC:Tool_IsPublic|Public the config (everyone can see your config)}<br/>
+                <input type="checkbox" class="General_Input_PublicAccount" disabled="disabled"  />{LOC:Tool_IsPublicAccount|Show your account when publiced}<br/>
+                {LOC:RD_FeedURL| Feed Url (do not forget http:// or https://):}<input type="text" id="RD_Input_Url" style="width:400px" /><br/>
+                <input type="button" id="RD_Input_Set" value="{LOC:RD_Btn_Save|Save & Get feed URL}" class="writeonlyElement" />
+                <input type="button" id="RD_Input_GetURL" value="{LOC:TD_Btn_GetURL|Get feed URL}" class="readonlyElement" />
+                <span id="RD_Error_EmptyURL" class="RD_Error"> {LOC:RD_Error_EmptyURL|Error: The URL is empty! } </span>
+            </div>
+            <div id="RD_FeedURL">
+                <a id="RD_Feed_URL">{LOC:RD_Result|Feed without description}</a>
+            </div>
+        </div>
+
+
+        <div id="page_Links2Feeds" style="display: none">
+            <span class="PageTitle">{LOC:L2F_Title|Convert Link to Feeds}</span>
+            <input type="button" value="{LOC:TOOL_BtnExit|Exit}" class="General_Btn_Exit" />
+            <span class="readonlyElement"><input type="button" value="{LOC:Tool_BtnClone|Clone to my private config}" class="General_Btn_Clone" /></span><br/><br/>
+            <div id="L2F_ControlPanel">
+                <div id="L2F_ParamterInut" style="float:left;width:500px;height:600px;border:1px solid #fcc;overflow:auto">
+                    {LOC:Tool_Name|Configuration name(optional):}<input type="text" class="General_Input_ConfigName" style="width:200px" /><br/>
+                    <input type="checkbox" class="General_Input_IsPublic" onclick="this.getParent().getElement('[class=General_Input_PublicAccount]').disabled=!this.checked;" />
+                    {LOC:Tool_IsPublic|Public the config (everyone can see your config)}<br/>
+                    <input type="checkbox" class="General_Input_PublicAccount" disabled="disabled"  />{LOC:Tool_IsPublicAccount|Show your account when publiced}<br/>
+                    <ol>
+                        <li>{LOC:L2F_SiteURL|Site URL (do not forget http:// or https://):}<br/><input type="text" id="L2F_Url" style="width:400px" /></li>
+                        <li>{LOC:L2F_Cookie|Cookie (optional):}<br/><input type="text" id="L2F_Cookie" style="width:400px" /></li>
+                        <li>{LOC:L2F_FeedTitle|Feed Title (optional, leave blank to use the title of HTML page):}<br/><input type="text" id="L2F_Title" style="width:400px" /></li>
+                        <li>{LOC:L2F_Pattern|Regular Express pattern for main content(leave blank to use the whole page):}<br/><input type="text" id="L2F_MainPattern" style="width:400px" /></li>
+                        <li>{LOC:L2F_Filters|Filters:}<br/>
+                            <ul>
+                                <li> {LOC:L2F_DescFilter|Filter description:}
+                                    <ul>
+                                        <li>{LOC:L2F_DescFilter_Include|Include Pattern(blank for all):}<br/><input type="text" id="L2F_DescIncludePattern" style="width:350px" /> </li>
+                                        <li>{LOC:L2F_DescFilter_Exclude|Exclude Pattern:}<br/><input type="text" id="L2F_DescExcludePattern" style="width:350px" /> </li>
+                                    </ul>
+                                </li>
+                                <li> {LOC:L2F_LinkFilter|Filter Links:}
+                                    <ul>
+                                        <li>{LOC:L2F_LinkFilter_Include|Include Pattern(blank for all):}<br/><input type="text" id="L2F_LinkIncludePattern" style="width:350px" /> </li>
+                                        <li>{LOC:L2F_LinkFilter_Exclude|Exclude Pattern:}<br/><input type="text" id="L2F_LinkExcludePattern" style="width:350px" /> </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <font size="-1"><b>{LOC:L2F_FilterHint|Hint: You can use "patternA|patternB" to match more than one pattern at the same time.}</b></font>
+                        </li>
+                        <li>
+                        <input type="radio" name="L2F_Input_GUID" id="L2F_Input_GUID_link" checked="checked" />{LOC:L2F_LinkGUID|Use link as the GUID of the item }
+                        <input type="radio" name="L2F_Input_GUID" id="L2F_Input_GUID_title" />{LOC:L2F_TitleGUID|Use title as the GUID of the item  } <br/><br/>
+                        </li>
+                    </ol>
+                    <input type="button" value="{LOC:L2F_BtnPreview|Preview}" id="L2F_Btn_Update" class="ReadonlyEnable" />
+                        <span id="L2F_Error_EmptyURL" class="L2F_Error"> Error: The URL is empty!  </span>
+                </div>
+                <div id="L2F_Result" style="float:left;width:500px;height:600px;border:1px solid #fcc;overflow:auto">
+                    <b style="font-size:smaller"><i>{LOC:L2F_Title|Title:}</i><span id="L2F_Result_Title" style="color:red"></span></b><br/>
+                    <ul id="L2F_ResultList"> </ul>
+                </div>
+                <div style="clear:both">
+                    <input type="button" value="{LOC:L2F_Save|Save & Get Feed URL}" id="L2F_Btn_GenerateFeed"  class="writeonlyElement" />
+                    <input type="button" value="{LOC:L2F_GetURL|Get Feed URL}" id="L2F_Btn_GetFeedURL"  class="readonlyElement" />
+                </div>
+            </div>
+            <div id="L2F_FeedURL">
+                <a id="L2F_Feed_URL">{LOC:L2F_FeedUrl|Feed URL}</a>
+            </div>
+        </div>
+
+        <div id="page_FeedFilters" style="display: none">
+            <span class="PageTitle">{LOC:FF_Title|Feed Filters}</span>
+            <input type="button" value="{LOC:TOOL_BtnExit|Exit}" class="General_Btn_Exit" />
+            <span class="readonlyElement"><input type="button" value="{LOC:Tool_BtnClone|Clone to my private config}" class="General_Btn_Clone" /></span><br/><br/>
+            <div id="FF_ControlPanel" style="float:left;width:650px;height:600px;border:1px solid #fcc;overflow:auto">
+                {LOC:Tool_Name|Configuration name(optional):}<input type="text" class="General_Input_ConfigName" style="width:200px" /><br/>
+                <input type="checkbox" class="General_Input_IsPublic" onclick="this.getParent().getElement('[class=General_Input_PublicAccount]').disabled=!this.checked;" />
+                {LOC:Tool_IsPublic|Public the config (everyone can see your config)}<br/>
+                <input type="checkbox" class="General_Input_PublicAccount" disabled="disabled"  />{LOC:Tool_IsPublicAccount|Show your account when publiced}<br/>
+                <ol>
+                    <li>{LOC:FF_RssURL|RSS URL(do not forget http:// or https://):}<br/><input type="text" id="FF_Url" style="width:400px" /></li>
+                    <li>{LOC:FF_Filters|Filters:}<br/>
+                    <ul>
+                        <span id="FF_li_Filter_proto" style="display:none">
+                            <li>
+                            <input type="button" value="↑" name="up" />
+                            <input type="button" value="↓" name="down" />
+                            <input type="button" value="×" name="remove" />
+                            <input type="text" name="FF_text_Filter" style="width:350px" />
+                            <br/>
+                            <span style="font-size:smaller">{LOC:FF_AssignColor|Assign a color:}
+                                <input type="radio" value="red" checked="checked" /> <span style="background-color:#c11;color:#fff">{LOC:Red|Red}</span>
+                                <input type="radio" value="blue" /> <span style="background-color:#11c;color:#fff">{LOC:Blue|Blue}</span>
+                                <input type="radio" value="green" /> <span style="background-color:#1c1;color:#fff">{LOC:Green|Green}</span>
+                                <input type="checkbox" name="Skip" checked="checked" />{LOC:FF_SkipFilter|Skip the filters below}
+                            </span>
+                            </li>
+                        </span>
+                        <span id="FF_FilterList"> </span>
+                    </ul>
+                    <input type="button" value="{LOC:FF_BtnNewFilter|New Filter}" id="FF_Btn_NewFilter" />
+                    </li>
+                </ol>
+                <input type="button" value="{LOC:FF_BtnPreview|Preview}" id="FF_Btn_Update" class="ReadonlyEnable" />
+                <input type="button" value="{LOC:FF_BtnSave|Save configuration}" id="FF_Btn_Save" />
+                <span id="FF_Error_EmptyURL" class="FF_Error"> {LOC:FF_Error_EmptyURL|Error: The URL is empty! } </span>
+                <span id="FF_Info_ConfigSaved" class="FF_Error"><span style="color:blue">{LOC:FF_Info_Saved|Configuration saved}</span> </span>
+            </div>
+            <div id="FF_Result" style="float:left;width:500px;height:600px;border:1px solid #fcc;overflow:auto">
+                <ul id="FF_ResultList"> </ul>
+            </div>
+            <div id="FF_FeedDiv" style="clear:both">
+                <input type="checkbox" id="FF_Generate_red" class="ReadonlyEnable" /> <span style="background-color:#c11;color:#fff">Red</span>
+                <input type="checkbox" id="FF_Generate_blue" class="ReadonlyEnable" /> <span style="background-color:#11c;color:#fff">Blue</span>
+                <input type="checkbox" id="FF_Generate_green" class="ReadonlyEnable" /> <span style="background-color:#1c1;color:#fff">Green</span>
+                <input type="checkbox" id="FF_Generate_grey" class="ReadonlyEnable" /> <span style="background-color:#555;color:#fff">Grey</span>
+                <span style="font-size:smaller">{LOC:FF_CustomTitle|Custom Title(blank to keep the original):}</span>
+                <input type="text" id="FF_Generate_title" style="width:100px" class="ReadonlyEnable" /> 
+                <input type="button" value="{LOC:FF_BtnSaveGetFeedURL|Save & Get Feed URL}" id="FF_Btn_GenerateFeed" class="writeonlyElement" />
+                <input type="button" value="{LOC:FF_BtnGetFeedURL|Get Feed URL}" id="FF_Btn_GetFeedURL" class="readonlyElement" />
+                <span id="FF_Error_NoColorChoosen" class="FF_Error"> {LOC:FF_Error_ColorRequirement|Error: You must choose one color at lease! } </span>
+                <br/>
+                <span id="FF_Feed_URL_span" style="display:none"><a id="FF_Feed_URL">{LOC:LOC_ResultURL|Feed URL} <span id="FF_Feed_URL_red" style="background-color:#c11;color:#fff">+Red</span> <span id="FF_Feed_URL_blue" style="background-color:#11c;color:#fff">+Blue</span> <span id="FF_Feed_URL_green" style="background-color:#1c1;color:#fff">+Green</span> <span id="FF_Feed_URL_grey" style="background-color:#555;color:#fff">+Grey</span> </a></span>
+            </div>
+        </div>
+
+
+        <div id="page_ContentExtend" style="display: none">
+            <span class="PageTitle">{LOC:CE_Title|Content Extend (get HTML page for the description)}</span>
+            <input type="button" value="{LOC:TOOL_BtnExit|Exit}" class="General_Btn_Exit" />
+            <span class="readonlyElement"><input type="button" value="{LOC:Tool_BtnClone|Clone to my private config}" class="General_Btn_Clone" /></span><br/><br/>
+            <div id="CE_ControlPanel">
+                <div id="CE_ParamterInut" style="float:left;width:500px;height:600px;border:1px solid #fcc;overflow:auto">
+                    {LOC:Tool_Name|Configuration name(optional):}<input type="text" class="General_Input_ConfigName" style="width:200px" /><br/>
+                    <input type="checkbox" class="General_Input_IsPublic" onclick="this.getParent().getElement('[class=General_Input_PublicAccount]').disabled=!this.checked;" />
+                    {LOC:Tool_IsPublic|Public the config (everyone can see your config)}<br/>
+                    <input type="checkbox" class="General_Input_PublicAccount" disabled="disabled"  />{LOC:Tool_IsPublicAccount|Show your account when publiced}<br/>
+                    <ol>
+                        <li>{LOC:CE_RssURL|RSS URL ((do not forget http:// or https://)):}<br/><input type="text" id="CE_Url" style="width:400px" /></li>
+                        <li>{LOC:CE_RePattern|Regular Express pattern for the content(you can start from:'&lt;body.*\/body&gt;'), use (...) to use the content in the parenthesis. }<br/>
+                        <input type="text" id="CE_Pattern" style="width:400px" /></li>
+                    </ol>
+                    <input type="button" value="{LOC:CE_Btn_Preview|Preview}" id="CE_Btn_Update" class="ReadonlyEnable" />
+                    <span id="CE_Error_EmptyURL" class="CE_Error" style="color:red"> {LOC:CE_Error_EmptyURL|Error: The URL is empty! } </span>
+                </div>
+                <div id="CE_Result" style="float:left;width:500px;height:600px;border:1px solid #fcc;overflow:auto">
+                    <span style="color:red">{LOC:CE_PreviewNote|Note: only first 3 will be output in preview!}</span>
+                    <div id="CE_Result_HTML" style="height:270px;border:1px solid #aaf;overflow:auto"><ul id="CE_Result_HTML_List"> </ul></div>
+                    <div id="CE_Result_Feed" style="height:270px;border:1px solid #aaf;overflow:auto"><ul id="CE_Result_Feed_List"> </ul></div>
+                </div>
+                <div style="clear:both">
+                    <input type="button" value="{LOC:CE_Save|Save & Get Feed URL}" id="CE_Btn_GenerateFeed"  class="writeonlyElement" />
+                    <input type="button" value="{LOC:CE_GetURL|Get Feed URL}" id="CE_Btn_GetFeedURL"  class="readonlyElement" />
+                </div>
+            </div>
+            <div id="CE_FeedURL">
+                <a id="CE_Feed_URL">{LOC:CE_ResultURL|Feed URL}</a>
+            </div>
+        </div>
+
+
+        <span id="LocString" style="display:none">
+            <span id="LocStr_WarningOnRemoveTool">{LOC:General_Warning_ToolRemove|Warning: The removed configuration cannot be recoverd after you remove it, are you sure you want to remove the config?}</span>
+            <span id="LocStr_WarningOnExitWithoutSave">{LOC:General_Warning_Exit|Warning: Exit without save will cause all your modification lost, are you sure you want to quit?}</span>
+        </span>
+    </body>
+</html>
+<!--
+    vim:ts=4:ft=htmlos
+-->
+
+

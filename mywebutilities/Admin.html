@@ -1,0 +1,42 @@
+<html>
+    <!--    (C)opyright Zlong 2010 -->
+    <head>
+        <meta http-equiv=content-type content="text/html; charset=UTF-8">
+        <script type="text/javascript" charset="UTF-8" src="/js/XML.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/js/HTTP.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/js/md5.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/js/jquery-1.4.2.min.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/Admin.js" ></script>
+        <title>Admin pandel</title>
+    </head>
+
+    <body onload="Init()">
+        <c_title>Admin pandel</c_title>
+        <BR>
+
+        <div id="page_Loading" style="display: inline">
+            <c_subtitle>Loading.</c_subtitle>
+            <br>
+        </div>
+
+        <div id="page_Admin" style="display: none">
+            <c_subtitle>Allowed URL Pattern (Regular Expression):</c_subtitle> <br>
+            <div id="Lst_URLs">
+            </div>
+            <br>
+            <textarea name="Txt_NewURL" id="Txt_NewURL" rows="20" cols="50" wrap="virtual" ></textarea><br>
+            <input type="button" name="Btn_AddURLs" value="Add URLs" onclick="AddURLs($('#Txt_NewURL')[0].value)">
+
+            <div id="page_IpInfo" >
+                <c_subtitle>The updated Ip Info:</c_subtitle> <br>
+                <div id="IpInfo">
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+<!--
+    vim:ts=4:ft=htmlos:encoding=utf8
+-->
+

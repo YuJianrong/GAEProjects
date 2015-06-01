@@ -1,0 +1,5 @@
+cron:
+- description: update the Fetch Cache
+  url: /General/UpdateFetchCache
+  schedule: every 30 minutes
+

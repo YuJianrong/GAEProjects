@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/svn/!svn/ver/35/FeedsToolsbox/General
+END
+utilities.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/35/FeedsToolsbox/General/utilities.py
+END
+PyRSS2Gen.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/35/FeedsToolsbox/General/PyRSS2Gen.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/35/FeedsToolsbox/General/__init__.py
+END
+UpdateFetchCache.py
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/35/FeedsToolsbox/General/UpdateFetchCache.py
+END
+feedparser.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/35/FeedsToolsbox/General/feedparser.py
+END
+datastore.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/35/FeedsToolsbox/General/datastore.py
+END

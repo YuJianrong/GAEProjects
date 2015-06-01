@@ -1,0 +1,58 @@
+<html>
+    <!--    (C)opyright Zlong 2010 -->
+    <head>
+        <meta http-equiv=content-type content="text/html; charset=UTF-8">
+        <script type="text/javascript" charset="UTF-8" src="/js/HTTP.js" ></script>
+        <script type="text/javascript" charset="UTF-8" src="/js/jquery-1.4.2.min.js" ></script>
+        <title>Ip Updater</title>
+    <script>
+        var tickRemain = 0;
+        function theTimer()
+        {
+            if (tickRemain <= 0)
+            {
+                UpdateTheIP();
+                tickRemain = parseInt( $("#UpdateInterval")[0].value ) * 10;
+            } else
+            {
+                tickRemain--;
+            }
+            $("#RemainTick")[0].innerHTML = tickRemain/10;
+        }
+        function Init()
+        {
+            setInterval(theTimer, 100);
+        }
+        function UpdateTheIP()
+        {
+            var request = HTTP.newRequest();
+            request.open("GET", "/UpdateIP.py", false);
+            request.send();
+            $("#Info")[0].innerHTML=request.responseText;
+        }
+    </script>
+    </head>
+
+    <body onload="Init()">
+        <c_title>Admin pandel</c_title>
+        <BR>
+
+        <div id="main" >
+            <c_subtitle>Remain:</c_subtitle> <span id="RemainTick"></span><br>
+            
+            <input type="text" id="UpdateInterval" name="text_IntervalValues" value="600" size=10>
+            <br>
+            <c_subtitle>Info:</c_subtitle>
+            <br>
+            <div id="Info">
+            </div>
+        </div>
+
+
+    </body>
+</html>
+<!--
+    vim:ts=4:ft=htmlos:encoding=utf8
+-->
+
+
