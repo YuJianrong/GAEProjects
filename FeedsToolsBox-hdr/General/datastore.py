@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+#
+# Copyright 2010 Yu Jianrong, All Rights Reserved
+#
+# Licensed under BSD License.
+#
+
+from google.appengine.ext import db
+from google.appengine.api import users
+
+class FeedUser(db.Model):
+  value = db.UserProperty()
+  date = db.DateTimeProperty(auto_now_add=True)
+  lang = db.StringProperty(default="en")
+
+# feedusers = db.GqlQuery("SELECT * FROM FeedUser")
+
+def getUser(uservalue):
+  locateUser = db.GqlQuery("SELECT * FROM FeedUser WHERE value = :1", uservalue)
+  if locateUser.count() != 0:
+    return locateUser[0]
+  return False
+
+
+
+class UserApply(db.Model):
+  value = db.UserProperty()
+  date = db.DateTimeProperty(auto_now_add=True)
+
+def getApply(uservalue):
+  locateUser = db.GqlQuery("SELECT * FROM UserApply WHERE value = :1", uservalue)
+  if locateUser.count() != 0:
+    return locateUser[0]
+  return False
+
+class ToolConfig(db.Model):
+  owner = db.UserProperty()
+  isPublic = db.BooleanProperty(default=False)
+  isPublicAccount = db.BooleanProperty(default=False)
+  type = db.StringProperty(choices=['RemoveDescription','Links2Feed','FeedFilters','ContentExtend'])
+  url = db.LinkProperty()
+  configuration = db.TextProperty()
+
+class CachedFetchList(db.Model):
+  url = db.LinkProperty()
+
+# class FetchCache(db.Model):
+#   # url= db.LinkProperty() #use url as the keyname of the entity, does not need a url property
+#   updatedate = db.DateTimeProperty(auto_now_add=True)
+#   accessdate = db.DateTimeProperty()
+#   content = db.BlobProperty()
+#   cookie = db.StringProperty(indexed=False)
+
+
+# vim:tabstop=2 expandtab shiftwidth=2 
