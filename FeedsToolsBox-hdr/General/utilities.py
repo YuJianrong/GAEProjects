@@ -87,7 +87,10 @@ def cachedFetch(url, cookie=None):
     # CachedFetch.updatedate = now
     # CachedFetch.accessdate = now
     # CachedFetch.put()
-    memcache.set(getCacheKey(url,cookie), result, 65*60)
+    try:
+      memcache.set(getCacheKey(url,cookie), result, 65*60)
+    except Exception:
+      "nothing"
 
   return result
 
